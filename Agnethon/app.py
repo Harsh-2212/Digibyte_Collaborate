@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask_mail import Mail, Message
+import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -9,6 +11,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 db = SQLAlchemy(app)
 app.app_context().push()
+
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'landeomkar133@gmail.com'
+app.config['MAIL_PASSWORD'] = 'fmuj wlxy ndoy huly'
+# app.config['MAIL_PASSWORD'] = 'Lande@0305'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
+mail = Mail(app)
 
 class Admin(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
@@ -25,7 +37,7 @@ class Admin(db.Model):
     vc_president = db.Column(db.String, nullable=False)
     vc_president_num = db.Column(db.Integer, nullable=False)
 
-@app.route("/")
+@app.route("/home" ,methods=['GET','POST']) 
 def hello_world():
     return render_template("home.html")
 
@@ -39,7 +51,7 @@ def hostaevent():
         event_head = request.form["eventHeadName"]
         event_number = int(request.form["eventHeadNumber"])
         president = request.form["presidentName"]
-        president_num = request.form["presidentNumber"]
+        president_num = int(request.form["presidentNumber"])
         vc_president = request.form["vpName"]
         vc_president_num = int(request.form["vpNumber"])
         desc = request.form["description"]
@@ -51,22 +63,23 @@ def hostaevent():
     organizer = Admin.query.all()
     return render_template("hostaevent.html", organizer=organizer)
 
-@app.route("/alogin")
+@app.route("/alogin", methods=['GET','POST'])
 def loginevent():
-    return render_template("login.html")
+    selected_button = request.form.get('redirect_button')
+    
+    if selected_button == 'login':
+        return redirect(url_for('loginevent'))
+    return render_template("hostaevent.html")
 
-
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dash.html")
-
-@app.route("/incharge_dashboard")
+@app.route("/incharge_dashboard",methods=[ "GET","POST"])
+@app.route("/",methods=[ "GET","POST"])
 def incharge_dashboard():
+    if request.method == 'POST':
+        msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
+        msg.body = "Hey your form has been approved"
+        mail.send(msg)
     organizer = Admin.query.all()
     return render_template("incharge_dashboard.html", organizer=organizer)
 
-
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
-
-
