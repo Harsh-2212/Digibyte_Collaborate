@@ -4,18 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='../static/dstyle.css') }}"
-    />
 </head>
 <body>
-    <header>
-        SparkED
-    </header>
     <div class="my-container">
-        <h2>Event Approval form </h2>
-        <h3>For The Principal</h3>
+        <h2>Approval Form</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -42,6 +34,7 @@
                     <td>{{adlib.event_head}}</td>
                     <td>{{adlib.event_number}}</td>
                     <td>{{adlib.president}}</td>
+                    <td>{{adlib.president_num}}</td>
                     <td>{{adlib.vc_president}}</td>
                     <td>{{adlib.vc_president_num}}</td>
                     <td>{{adlib.desc}}</td>
