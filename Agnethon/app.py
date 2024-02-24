@@ -54,5 +54,10 @@ def hostaevent():
 @app.route("/alogin")
 def loginevent():
     return render_template("login.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dash.html")
+
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
