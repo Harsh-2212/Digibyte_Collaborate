@@ -55,9 +55,18 @@ def hostaevent():
 def loginevent():
     return render_template("login.html")
 
+
 @app.route("/dashboard")
 def dashboard():
     return render_template("dash.html")
 
+@app.route("/incharge_dashboard")
+def incharge_dashboard():
+    organizer = Admin.query.all()
+    return render_template("incharge_dashboard.html", organizer=organizer)
+
+
 if __name__ == '__main__':
     app.run(debug=True,port=8000)
+
+
