@@ -16,5 +16,8 @@ def hello_world():
 def hostaevent():
     return render_template("hostaevent.html")
 
+@app.route("/alogin")
+def loginevent():
+    return render_template("login.html")
 if __name__ == '__main__':
     app.run(debug=True)
