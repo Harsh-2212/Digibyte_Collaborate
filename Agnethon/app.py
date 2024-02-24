@@ -1,23 +1,58 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///admin.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'thisisasecretkey'
 db = SQLAlchemy(app)
-app.app_context
+app.app_context().push()
+
+class Admin(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    event_name = db.Column(db.String, nullable=False)
+    c_name = db.Column(db.String, nullable=False)
+    v_name = db.Column(db.String, nullable=False)
+    datetime = db.Column(db.DateTime, default=datetime.utcnow)
+    desc = db.Column(db.String, nullable=False)
+    pr_message = db.Column(db.String, nullable=False)
+    event_head = db.Column(db.String, nullable=False)
+    event_number = db.Column(db.Integer, nullable=False)
+    president = db.Column(db.String, nullable=False)
+    president_num = db.Column(db.Integer, nullable=False)
+    vc_president = db.Column(db.String, nullable=False)
+    vc_president_num = db.Column(db.Integer, nullable=False)
 
 @app.route("/")
 def hello_world():
     return render_template("home.html")
 
-@app.route("/hostaevent")
+@app.route("/hostaevent", methods=['GET','POST'])
 def hostaevent():
-    return render_template("hostaevent.html")
+    if request.method == 'POST':
+        event_name = request.form["eventName"]
+        c_name = request.form["committee"]
+        v_name = request.form["venue"]
+        pr_message = request.form["prMessage"]
+        event_head = request.form["eventHeadName"]
+        event_number = int(request.form["eventHeadNumber"])
+        president = request.form["presidentName"]
+        president_num = request.form["presidentNumber"]
+        vc_president = request.form["vpName"]
+        vc_president_num = int(request.form["vpNumber"])
+        desc = request.form["description"]
+
+        adlib = Admin(event_name=event_name, c_name=c_name, v_name=v_name, pr_message=pr_message, event_head=event_head, event_number=event_number, president=president, president_num=president_num, vc_president=vc_president, vc_president_num=vc_president_num, desc=desc)
+        db.session.add(adlib)
+        db.session.commit()
+
+    organizer = Admin.query.all()
+    return render_template("hostaevent.html", organizer=organizer)
 
 @app.route("/alogin")
 def loginevent():
     return render_template("login.html")
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=8000)
