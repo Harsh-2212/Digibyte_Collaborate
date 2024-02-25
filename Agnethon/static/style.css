@@ -248,3 +248,40 @@ a {
         width: 90%;
     }
 }
+
+.toggle-form {
+    display: inline-block;
+    overflow: hidden;
+    border: 2px solid #df4adf;
+    border-radius: 20px;
+    position: relative;
+    padding-left: 10px ;
+}
+
+.bttnn {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+    
+}
+
+/* .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #df4adf;
+    transition: width 0.3s ease-in-out;
+  } */
+
+#student-toggle:checked ~ .slider {
+    transform: translateX(100%);
+}
+
+#host-toggle:checked ~ .slider {
+    transform: translateX(0%);
+    
+}

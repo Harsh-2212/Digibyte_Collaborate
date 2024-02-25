@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='../static/dstyle.css') }}"
+    />
 </head>
 <body>
     <div class="my-container">
@@ -22,6 +26,7 @@
                     <th scope="col">Vice-President</th>
                     <th scope="col">Vice-President number</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,12 +43,17 @@
                     <td>{{adlib.vc_president}}</td>
                     <td>{{adlib.vc_president_num}}</td>
                     <td>{{adlib.desc}}</td>
+                    <td>
+                        <form action="{{url_for('approve')}}" method="POST">
+                            <button>Approve</button>
+                        </form>
+                        <form action="{{url_for('reject')}}" method="POST">
+                            <button>Reject</button>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <form action="" method="POST">
-            <button>Approve</button>
         </form>
     </div>
 </body>

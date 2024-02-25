@@ -15,3 +15,14 @@ sign_up_btn2.addEventListener("click", () => {
 sign_in_btn2.addEventListener("click", () => {
     container.classList.remove("sign-up-mode2");
 });
+
+document.querySelectorAll('.btn').forEach(item => {
+    item.addEventListener('click', event => {
+        document.querySelector('.slider').style.transition = 'transform 0.3s';
+        if (event.target.id === 'student-toggle') {
+            document.querySelector('.slider').style.transform = 'translateX(100%)';
+        } else {
+            document.querySelector('.slider').style.transform = 'translateX(0%)';
+        }
+    });
+});

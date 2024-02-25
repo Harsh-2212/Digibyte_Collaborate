@@ -37,9 +37,22 @@ class Admin(db.Model):
     vc_president = db.Column(db.String, nullable=False)
     vc_president_num = db.Column(db.Integer, nullable=False)
 
-@app.route("/home" ,methods=['GET','POST']) 
+class User(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+
+@app.route("/" ,methods=['GET','POST']) 
 def hello_world():
-    return render_template("home.html")
+    selected_button = request.form.get('redirect_button')
+
+    if selected_button == 'login':
+        return redirect(url_for('loginevent'))
+    # elif selected_button == 'login':
+    #     return redirect(url_for('login'))
+    # elif selected_button == 'login_incharge':
+    #     return redirect(url_for('incharge_login'))
+    return render_template("dash.html")
 
 @app.route("/hostaevent", methods=['GET','POST'])
 def hostaevent():
@@ -63,23 +76,58 @@ def hostaevent():
     organizer = Admin.query.all()
     return render_template("hostaevent.html", organizer=organizer)
 
+@app.route("/dashboard", methods=['GET','POST'])
+def dashboard():    
+    selected_button = request.form.get('dash.html')
+
 @app.route("/alogin", methods=['GET','POST'])
-def loginevent():
-    selected_button = request.form.get('redirect_button')
-    
-    if selected_button == 'login':
-        return redirect(url_for('loginevent'))
-    return render_template("hostaevent.html")
+def loginevent():    
+    selected_button = request.form.get('login')
+
+
+    if selected_button == 'Login':
+        return redirect(url_for('hostaevent'))
+        # username = request.form.get['username']
+        # password = request.form.get['password']
+        # user = User.query.filter_by(username=username, password=password).first()
+        # db.session.add(user)
+        # db.session.commit()
+
+        # host = User.query.all()
+        # if user:
+        #     session['logged_in'] = True
+        #     session['username'] = username
+        #     return redirect(url_for('hello_world'),host=host)
+        # else:
+        #     return render_template('login.html', error='Invalid username or password')
+    return render_template('login.html')
 
 @app.route("/incharge_dashboard",methods=[ "GET","POST"])
-@app.route("/",methods=[ "GET","POST"])
+@app.route("/email",methods=[ "GET","POST"])
+# @app.route("/",methods=[ "GET","POST"])
 def incharge_dashboard():
+    # if request.method == 'POST':
+    #     msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
+    #     msg.body = "Hey your form has been approved"
+    #     mail.send(msg)
+    organizer = Admin.query.all()
+    return render_template("incharge_dashboard.html", organizer=organizer)
+
+@app.route("/approve",methods=[ "GET","POST"])
+def approve():
     if request.method == 'POST':
         msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
         msg.body = "Hey your form has been approved"
         mail.send(msg)
-    organizer = Admin.query.all()
-    return render_template("incharge_dashboard.html", organizer=organizer)
+    return redirect(url_for('incharge_dashboard'))
+
+@app.route("/reject",methods=[ "GET","POST"])
+def reject():
+    if request.method == 'POST':
+        msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
+        msg.body = "Hey your form has been Rejected"
+        mail.send(msg)
+    return redirect(url_for('incharge_dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True,port=8000)

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='../static/stigma.css') }}"
-  />
+      rel="stylesheet"
+      href="{{ url_for('static', filename='../static/stigma.css') }}"
+    />
     <title>Dashboard</title>
 </head>
 <body>
@@ -16,49 +16,43 @@
             <div class="logo">
                 <h2>SparkEd</h2>
             </div>
-            <!-- <div class="search">
+            <div class="search">
                 <input type="text" id="search" placeholder="search">
                 <label for="search"> <i class="fa fa-search"></i></label>
-            </div> -->
+            </div>
             <i class="fa fa-bell"></i>
             <div class="user">
                 <img src="undraw.svg" alt="">
             </div>
+            <div class="dashboard-icon">
+                <i class="fas fa-th-large"></i>
+            </div>
         </div>
         <div class="sidebar">
             <ul>
-                <li>
+                <!-- <li class="dashboard-item">
                     <a href="#">
-                        <i class="fas fa-th-large"></i>
                         <div>Dashboard</div>
                     </a>
-                </li>
-            </ul>
-            <ul>
+                </li> -->
                 <li>
                     <a href="#">
                         <i class="fas fa-user-graduate"></i>
                         <div>Registered Event</div>
                     </a>
                 </li>
-            </ul>
-            <ul>
                 <li>
                     <a href="#">
                         <i class="fa fa-users"></i>
                         <div>Communities</div>
                     </a>
                 </li>
-            </ul>
-            <ul>
                 <li>
                     <a href="#">
                         <i class="fa fa-cog"></i>
                         <div>Settings</div>
                     </a>
                 </li>
-            </ul>
-            <ul>
                 <li>
                     <a href="#">
                         <i class="fa fa-question"></i>
@@ -117,10 +111,10 @@
                 </div>
             </div>
         </div>
-        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../static/chart1.js"></script>
-    <script src="../static/chart2.js"></script>
+    <script src="chart1.js"></script>
+    <script src="chart2.js"></script>
+    <script src="../static/dash.js"></script>
 </body>
 </html>

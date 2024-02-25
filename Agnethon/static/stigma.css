@@ -59,32 +59,70 @@
 .sidebar{
     position: fixed;
     top:60px;
+    left: 0;
     width: 260px;
     height:100%;
     background-color: #df4adf;
     overflow-x: hidden;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
 }
-.sidebar ul{
-    margin-top: 20px;
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+  }
+.sidebar.visible{
+    transform: translateX(0);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    transform: translateX(0);
 }
-.sidebar ul li{
-    width: 100%;
-    list-style: none;
-
-}
-.sidebar ul li a{
-    width: 100%;
+.sidebar ul li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.3s ease-in-out;
+  }
+.sidebar ul li:hover {
+    background-color: #e0e0e0;
+  }
+  .sidebar ul li a i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     color: #fff;
-    height: 60px;
-    display: flex;
-    align-items: calc(center)
+  }
+.sidebar ul li a i.active{
+    color: #df4adf;
 }
-.sidebar ul li a i{
-    min-width: 60px;
+.sidebar ul li a:hover {
+    /* ...existing styles... */
+    color: #fff;
+  }
+  .sidebar ul li a .label {
+    font-size: 16px;
+    margin-left: 10px;
+  }  
+  .sidebar .sidebar-icon {
+    position: absolute;
+    top: 15px;
+    right: 20px;
     font-size: 24px;
-    text-align: center;
-}
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  .sidebar .sidebar-icon.active {
+    transform: rotate(180deg);
+  }
+.sidebarvisible {
+    transform : translateX(0);
+     transition: transform 03s ease--out;
+     font-family: 'Poppins', sans-serif;
+   }
 .main{
     position: absolute;
     top:60px;
