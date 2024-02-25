@@ -5,70 +5,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Form</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='../static/hstyle.css') }}"
     />
 </head>
 <body>
+    <div class="container">
     <h1>Event Form</h1>
-    <form id="eventForm">
+    <form id="eventForm" action="{{ url_for('hostaevent') }}" method="POST">
         <label for="eventName">Event Name:</label>
         <input type="text" id="eventName" name="eventName" required><br><br>
 
-        <label for="committee">Committee Name:</label>
-        <select id="committee" name="committee" onchange="updateContactDetails()">
-            <option value="committeeA">Committee A</option>
-            <option value="committeeB">Committee B</option>
-            <option value="committeeC">Committee C</option>
-        </select><br><br>
+    
 
-        <label for="venue">Venue:</label>
-        <select id="venue" name="venue">
-            <option value="venueA">Venue A</option>
-            <option value="venueB">Venue B</option>
-            <option value="venueC">Venue C</option>
-        </select><br><br>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required><br><br>
+            <label for="committee">Committee Name:</label>
+            <select id="committee" name="committee" onchange="updateContactDetails()">
+                <option value="committeeA">Committee A</option>
+                <option value="committeeB">Committee B</option>
+                <option value="committeeC">Committee C</option>
+            </select><br><br>
 
-        <label for="timeFrom">Time Slot From:</label>
-        <input type="time" id="timeFrom" name="timeFrom" required><br><br>
+            <label for="venue">Venue:</label>
+            <select id="venue" name="venue">
+                <option value="venueA">Venue A</option>
+                <option value="venueB">Venue B</option>
+                <option value="venueC">Venue C</option>
+            </select><br><br>
 
-        <label for="timeTo">Time Slot To:</label>
-        <input type="time" id="timeTo" name="timeTo" required><br><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br><br>
 
-        <label for="description">Description:</label><br>
-        <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
+            <label for="timeFrom">Time Slot From:</label>
+            <input type="time" id="timeFrom" name="timeFrom" required><br><br>
 
-        <label for="poster">Poster (image):</label>
-        <input type="file" id="poster" name="poster" accept="image/*"><br><br>
+            <label for="timeTo">Time Slot To:</label>
+            <input type="time" id="timeTo" name="timeTo" required><br><br>
 
-        <label for="prMessage">PR Message:</label><br>
-        <textarea id="prMessage" name="prMessage" rows="4" cols="50" required></textarea><br><br>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
 
-        <label for="eventHeadName">Event Head Name:</label>
-        <input type="text" id="eventHeadName" name="eventHeadName" required><br><br>
+            <label for="poster">Poster (image):</label>
+            <input type="file" id="poster" name="poster" accept="image/*"><br><br>
 
-        <label for="eventHeadNumber">Event Head Number:</label>
-        <input type="tel" id="eventHeadNumber" name="eventHeadNumber" required><br><br>
+            <label for="prMessage">PR Message:</label><br>
+            <textarea id="prMessage" name="prMessage" rows="4" cols="50" required></textarea><br><br>
 
-        <label for="presidentName">President Name:</label>
-        <input type="text" id="presidentName" name="presidentName" readonly><br><br>
+            <label for="eventHeadName">Event Head Name:</label>
+            <input type="text" id="eventHeadName" name="eventHeadName" required><br><br>
 
-        <label for="presidentNumber">President Number:</label>
-        <input type="tel" id="presidentNumber" name="presidentNumber" readonly><br><br>
+            <label for="eventHeadNumber">Event Head Number:</label>
+            <input type="tel" id="eventHeadNumber" name="eventHeadNumber" required><br><br>
 
-        <label for="vpName">Vice-President Name:</label>
-        <input type="text" id="vpName" name="vpName" readonly><br><br>
+            <label for="presidentName">President Name:</label>
+            <input type="text" id="presidentName" name="presidentName" readonly><br><br>
 
-        <label for="vpNumber">Vice-President Number:</label>
-        <input type="tel" id="vpNumber" name="vpNumber" readonly><br><br>
+            <label for="presidentNumber">President Number:</label>
+            <input type="tel" id="presidentNumber" name="presidentNumber" readonly><br><br>
 
-        <input type="submit" value="Submit">
-    </form>
+            <label for="vpName">Vice-President Name:</label>
+            <input type="text" id="vpName" name="vpName" readonly><br><br>
 
-    <script src="hscript.js"></script>
+            <label for="vpNumber">Vice-President Number:</label>
+            <input type="tel" id="vpNumber" name="vpNumber" readonly><br><br>
+
+            <div class="but">
+                <button id="btn">
+                    <p id="btnText">Submit</p>
+                    <div class="check-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <path fill="transparent" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <script type="text/javascript">
+                const btn = document.querySelector("#btn");
+                const btnText = document.querySelector("#btnText");
+        
+                btn.onclick = () => {
+                    btnText.innerHTML = "Thanks";
+                    btn.classList.add("active");
+                };
+            </script>
+        </form>
+
+    <script src="../static/hscript.js"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='../static/s_dash.css') }}"
+    />
+</head>
+<body>
+    <div class="container">
+        <h1>Student Dashboard</h1>
+        <div class="grid">
+            <div class="card fadeIn">
+                <h2>Profile</h2>
+                <p>Welcome to your student dashboard. Here you can manage your profile information.</p>
+            </div>
+            <div class="card fadeIn">
+                <h2><a style="color: black; text-decoration: none;" href="{{url_for('hostaevent')}}">Courses</a></h2>
+                <p>Explore and enroll in courses that interest you. Learn new skills and expand your knowledge.</p>
+            </div>
+            <div class="card fadeIn">
+                <h2>Grades</h2>
+                <p>View your grades and performance in various courses. Monitor your academic progress.</p>
+            </div>
+            <div class="card fadeIn">
+                <h2>Events</h2>
+                <p>Stay updated with upcoming events and activities in your academic institution.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

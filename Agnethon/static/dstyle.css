@@ -1,0 +1,90 @@
+body {
+    background: #444;
+}
+
+header {
+    background: linear-gradient(-45deg, #df4adf, #520852);
+    padding: 20px;
+
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    border-radius: 10px;
+}
+
+h2,
+h3 {
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+table {
+    width: 98%;
+    margin: auto;
+    text-align: center;
+    table-layout: fixed;
+    border-radius: 10px;
+    /* margin: 10px; */
+}
+
+.my-container {
+    /* background: white; */
+    background: linear-gradient(-45deg, #df4adf, #520852);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    height: 100%;
+}
+
+table,
+td,
+tr {
+    padding: 12px;
+    color: rgb(15, 2, 37);
+    background: white;
+    border: 1px solid white;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+tr:not(th) {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.005), 0 -4px 6px rgba(0, 0, 0, 0.05);
+
+}
+
+th {
+    color: white;
+    /* border: 1px solid white; 
+    border-collapse: separate;  */
+    /* border-spacing:0 20px; */
+    background: #df4adf;
+    /* border-radius: 5px; */
+    padding: 2px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+
+.approve-button,
+.reject-button {
+    margin: 2px;
+    font-size: 11px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(-45deg, #df4adfcc, #520852d6);
+    color: white;
+    padding: 7px;
+    transition: box-shadow 0.3s ease;
+}
+
+.approve-button:active,
+.reject-button:active {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 -4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(2px);
+}

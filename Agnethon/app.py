@@ -1,23 +1,12 @@
-<<<<<<< Updated upstream
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route("/")
-def hello_world():
-    return render_template("home.html")
-
-@app.route("/hostaevent")
-def hostaevent():
-    return render_template("hostaevent.html")
-=======
 from flask import Flask, render_template, redirect, url_for, request, flash, session
+from werkzeug.security import check_password_hash
 from flask_mail import Mail, Message
+from flask_login import UserMixin
+
 import os
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from werkzeug.utils import secure_filename
-import uuid
+
 
 app = Flask(__name__)
 
@@ -51,21 +40,16 @@ class Admin(db.Model):
     president_num = db.Column(db.Integer, nullable=False)
     vc_president = db.Column(db.String, nullable=False)
     vc_president_num = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(255), nullable=True)
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
 
 @app.route("/" ,methods=['GET','POST']) 
-def hello_world():
-    return render_template("home.html")
-
-UPLOAD_FOLDER = '/path/to/upload/folder'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+def home():
+    return render_template("dash.html")
 
 @app.route("/hostaevent", methods=['GET','POST'])
 def hostaevent():
@@ -81,14 +65,6 @@ def hostaevent():
         vc_president = request.form["vpName"]
         vc_president_num = int(request.form["vpNumber"])
         desc = request.form["description"]
-        image = request.files['image']
-        if image and allowed_file(image.filename):
-            filename = secure_filename(image.filename)
-            unique_id = str(uuid.uuid4())
-            save_path = os.path.join(app.config['UPLOAD_FOLDER'], unique_id)
-            os.makedirs(save_path)
-            filepath = os.path.join(save_path, filename)
-            image.save(filepath)
 
         adlib = Admin(event_name=event_name, c_name=c_name, v_name=v_name, pr_message=pr_message, event_head=event_head, event_number=event_number, president=president, president_num=president_num, vc_president=vc_president, vc_president_num=vc_president_num, desc=desc)
         db.session.add(adlib)
@@ -97,40 +73,105 @@ def hostaevent():
     organizer = Admin.query.all()
     return render_template("hostaevent.html", organizer=organizer)
 
+# @app.route("/dashboard", methods=['GET','POST'])
+# def dashboard():    
+#     selected_button = request.form.get('dash.html')
+
 @app.route("/alogin", methods=['GET','POST'])
 def loginevent():
-    selected_button = request.form.get('redirect_button')
-    
-    if selected_button == 'login':
-        return redirect(url_for('loginevent'))
-    return render_template("hostaevent.html")
+    return render_template('login.html')
 
 @app.route("/incharge_dashboard",methods=[ "GET","POST"])
-# @app.route("/",methods=[ "GET","POST"])
 def incharge_dashboard():
-    # if request.method == 'POST':
-    #     msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
-    #     msg.body = "Hey your form has been approved"
-    #     mail.send(msg)
     organizer = Admin.query.all()
     return render_template("incharge_dashboard.html", organizer=organizer)
 
 @app.route("/approve",methods=[ "GET","POST"])
 def approve():
     if request.method == 'POST':
-        msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
-        msg.body = "Hey your form has been approved"
+        subject = 'Hello from SparkEd'
+
+        email_content = render_template('email_template.html')
+        msg = Message(subject,sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
+        msg.html = email_content
         mail.send(msg)
-    return redirect(url_for('incharge_dashboard'))
+
+    return 'Email sent successfully!'
+    return redirect(url_for('incharge_dashboard'));
 
 @app.route("/reject",methods=[ "GET","POST"])
 def reject():
     if request.method == 'POST':
-        msg = Message("Hey",sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
-        msg.body = "Hey your form has been Rejected"
+        subject = 'Hello from SparkEd'
+
+        email_content = render_template('email_template.html')
+        msg = Message(subject,sender='noreply@demo.com',recipients=['landeomkar133@gmail.com'])
+        msg.html = email_content
         mail.send(msg)
-    return redirect(url_for('incharge_dashboard'))
->>>>>>> Stashed changes
+
+    return 'Email sent successfully!'
+    return redirect(url_for('incharge_dashboard'));
+
+from flask import request, render_template, redirect, url_for, flash
+from werkzeug.security import generate_password_hash
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == 'POST':
+        username = request.form["username"]
+        email = request.form["email"]
+        password = request.form["password"]
+        # existing_user = User.query.filter_by(username=username).first()
+        # existing_email = User.query.filter_by(email=email).first()
+
+        # if existing_user:
+        #     flash('Username already exists. Please choose a different one.', 'error')
+        #     return redirect(url_for('register'))
+        # elif existing_email:
+        #     flash('Email address is already registered.', 'error')
+        #     return redirect(url_for('register'))
+
+        # Add the new user to the database
+        new_user = User(username=username, email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Registration successful. Please log in.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template("login.html")
+
+@app.route("/student_dashboard")
+def  student_dashboard():
+    return render_template("s_dash.html")
+
+@app.route("/incharge")
+def  incharge():
+    return render_template("incharge.html")
+
+@app.route("/login", methods=["POST","GET"])
+def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        # Query user from the database based on email
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.password == password:
+            # session['user_id'] = user.id
+            # session['username'] = user.username
+            # session['email'] = user.email
+            return redirect(url_for('student_dashboard'))
+        else:
+            flash('Invalid email or password', 'error')
+            return redirect(url_for('loginevent'))
+
+    return render_template("s_dash.html")
+    
+        
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=3000)
