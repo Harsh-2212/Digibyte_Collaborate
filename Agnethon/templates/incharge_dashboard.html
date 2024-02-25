@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="my-container">
+        <h2>Approval Form</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Committee Name</th>
+                    <th scope="col">Venue</th>
+                    <th scope="col">PR Message</th>
+                    <th scope="col">Event Head</th>
+                    <th scope="col">Event Number</th>
+                    <th scope="col">President</th>
+                    <th scope="col">President Number</th>
+                    <th scope="col">Vice-President</th>
+                    <th scope="col">Vice-President number</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for adlib in organizer %}
+                <tr>
+                    <td>{{adlib.event_name}}</td>
+                    <td>{{adlib.c_name}}</td>
+                    <td>{{adlib.v_name}}</td>
+                    <td>{{adlib.pr_message}}</td>
+                    <td>{{adlib.event_head}}</td>
+                    <td>{{adlib.event_number}}</td>
+                    <td>{{adlib.president}}</td>
+                    <td>{{adlib.president_num}}</td>
+                    <td>{{adlib.vc_president}}</td>
+                    <td>{{adlib.vc_president_num}}</td>
+                    <td>{{adlib.desc}}</td>
+                    <td>{{adlib.image}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <form action="{{url_for('approve')}}" method="POST">
+            <button>Approve</button>
+        </form>
+        <form action="{{url_for('reject')}}" method="POST">
+            <button>Reject</button>
+        </form>
+    </div>
+</body>
+</html>
