@@ -15,4 +15,4 @@ Press CTRL+C to quit
  .tables
  select * from `table_name`
 
- video link of project:
+ video link of project:https://youtu.be/DCATP-IUsOI
