@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/navbar.css') }}"/>      
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/s_dash.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/dstyle.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/stigma.css') }}"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='../static/hstyle.css') }}"/>
+<title>{% block title %}SparkEd{% endblock %}</title>
+</head>
+<body>
+<div class="container">
+    <div class="topbar">
+        <div class="logo">
+            <h2>SparkEd</h2>
+        </div>
+        <div class="search">
+            <input type="text" id="search" placeholder="search">
+            <label for="search"> <i class="fa fa-search"></i></label>
+        </div>
+        <i class="fa fa-bell"></i>
+        <div class="user">
+            <img src="../static/images/undraw.svg" alt="">
+        </div>
+        <div class="dashboard-icon">
+            <i class="fas fa-th-large"></i>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar">
+    <ul>
+        <a href="/login">
+            <li>
+                <i class="fas fa-user-graduate"></i>
+                <div>Login</div>
+            </li>
+        </a>
+        <a href="/logout">
+            <li>
+                <i class="fa fa-users"></i>
+                <div>Logout</div>
+            </li>
+        </a>
+        <a href="/" id="registeredEvent">
+            <li>
+                <i class="fa fa-cog"></i>
+                <div>Home</div>
+            </li>
+        </a>
+        <a href="/">
+            <li>
+                <i class="fa fa-question"></i>
+                <div>Contact Us</div>
+            </li>
+        </a>
+    </ul>
+</div>
+{% block content %}{% endblock %}
+</body>
+<script src="../static/images/navbar.js"></script>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'navbar.html' %}
+{% block content %}
+    <header>
+        <h1>Student Portal</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('view.student_dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('view.hostaevent') }}">Register For Events</a></li>
+            <li><a href="{{ url_for('auth.login') }}">View Assignments</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+    <footer>
+        <p>&copy; {{ current_year }} Student Portal</p>
+    </footer>
+
+{% endblock %}

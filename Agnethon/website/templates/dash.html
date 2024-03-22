@@ -1,0 +1,56 @@
+{% extends 'navbar.html' %}
+{% block title %}SparkEd{% endblock %}
+        {% block content %}
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">1217</div>
+                        <div class="card-name">Contacts</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">48</div>
+                        <div class="card-name">Participants</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">20</div>
+                        <div class="card-name">Mentors</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">₹500</div>
+                        <div class="card-name">Amount</div>
+                    </div>
+                </div>
+            </div>
+            <div class="charts">
+                <div class="chart">
+                    <h2>Events Registered (in past 6 months)</h2>
+                    <canvas id="LineChart"></canvas>
+                </div>
+                <div class="chart" id="doughnut-chart">
+                    <h2>Students Participation</h2>
+                    <canvas id="chartId"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../static/images/chart1.js"></script>
+    <script src="../static/images/chart2.js"></script>
+    <script src="../static/images/dash.js"></script>
+    {% endblock %}

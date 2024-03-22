@@ -1,0 +1,51 @@
+/* dstyle.css */
+
+/* Style for the dropdown icon */
+.dropdown-icon {
+    cursor: pointer;
+    color: blue; /* Example color */
+}
+
+/* Style for the dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px; /* Adjust width as needed */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+/* Style for table headers */
+th {
+    padding: 8px;
+    text-align: left;
+    background-color: #f2f2f2;
+}
+
+/* Style for table cells */
+td {
+    padding: 8px;
+}
+
+/* Style for approve and reject buttons */
+.approve-button,
+.reject-button {
+    padding: 6px 12px;
+    background-color: #4CAF50; /* Green for approve */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.reject-button {
+    background-color: #f44336; /* Red for reject */
+}
+
+.approve-button:hover,
+.reject-button:hover {
+    opacity: 0.8;
+}
